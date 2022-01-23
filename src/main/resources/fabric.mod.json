@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "playtime",
+  "version": "${version}",
+  "name": "Playtime",
+  "description": "",
+  "authors": [
+    "fanta"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/playtime/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "de.fanta.playtime.PlaytimeClient"
+    ]
+  },
+  "mixins": [
+    "playtime.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.12.12",
+    "minecraft": "1.18.1"
+  }
+}
