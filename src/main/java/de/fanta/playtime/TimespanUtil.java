@@ -91,7 +91,7 @@ public class TimespanUtil {
 
     public static String formatTime(Long time) {
         String formattime = formatTimespan((time / 1000) * 1000, " Days, ", ":", "", "", "", ":", false, true);
-        if (formattime.startsWith("1 Tage")) {
+        if (formattime.startsWith("1 Days")) {
             return formatTimespan((time / 1000) * 1000, " Day, ", ":", "", "", "", ":", false, true);
         }
         return formattime;
