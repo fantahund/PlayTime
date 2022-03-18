@@ -31,7 +31,7 @@ public class Config {
         try {
             InputStream s = Files.newInputStream(configPath);
             prop.load(s);
-            playtime = Integer.parseInt(prop.getProperty("playtime", String.valueOf(playtime)));
+            playtime = Long.parseLong(prop.getProperty("playtime", String.valueOf(playtime)));
         } catch (IOException e) {
             PlaytimeClient.LOGGER.warn("Failed to read config!");
         }
