@@ -3,8 +3,8 @@ package de.fanta.playtime;
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.GameMenuScreen;
-import net.minecraft.client.util.math.MatrixStack;
 
 import java.awt.*;
 
@@ -17,20 +17,20 @@ public class GUI {
         this.fontRenderer = minecraft.textRenderer;
     }
 
-    public void onRenderGameOverlayPost(MatrixStack stack) {
-        if (minecraft.options.debugEnabled) {
+    public void onRenderGameOverlayPost(DrawContext context) {
+        if (minecraft.getDebugHud().shouldShowDebugHud()) {
             return;
         }
         if (minecraft.currentScreen instanceof GameMenuScreen) {
             GlStateManager._clearColor(1.0f, 1.0f, 1.0f, 1.0f);
-            renderOnlinetime(stack);
+            renderOnlinetime(context);
         }
     }
 
-    private void renderOnlinetime(MatrixStack stack) {
+    private void renderOnlinetime(DrawContext context) {
         RenderSize result = new RenderSize(0, 0);
         result.width = getWith(result.width, "Playtime: " + TimespanUtil.formatTime(PlaytimeClient.getPlaytime()));
-        this.fontRenderer.drawWithShadow(stack, "Playtime: " + TimespanUtil.formatTime(PlaytimeClient.getPlaytime()), 5, (30 + result.height + 9 / 2f), Color.WHITE.getRGB());
+        context.drawText(this.fontRenderer, "Playtime: " + TimespanUtil.formatTime(PlaytimeClient.getPlaytime()), 5, (30 + result.height + 9 / 2), Color.WHITE.getRGB(), true);
     }
 
     private int getWith(int resultWidth, String text) {

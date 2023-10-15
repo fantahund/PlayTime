@@ -1,6 +1,8 @@
 package de.fanta.playtime.mixin;
 
 import de.fanta.playtime.GUI;
+import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.Drawable;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.math.MatrixStack;
 import org.objectweb.asm.Opcodes;
@@ -14,9 +16,9 @@ abstract class InGameHudMixin {
     private static GUI playtimegui;
 
     @Inject(method = "render", at = @At(value = "FIELD", target = "Lnet/minecraft/client/option/GameOptions;debugEnabled:Z", opcode = Opcodes.GETFIELD, args = {"log=false"}))
-    private void beforeRenderDebugScreen2(MatrixStack stack, float f, CallbackInfo ci) {
+    private void beforeRenderDebugScreen2(DrawContext context, float tickDelta, CallbackInfo ci) {
         if (playtimegui == null)
             playtimegui = new GUI();
-        playtimegui.onRenderGameOverlayPost(stack);
+        playtimegui.onRenderGameOverlayPost(context);
     }
 }
