@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 abstract class InGameHudMixin {
     private static GUI playtimegui;
 
-    @Inject(method = "render", at = @At(value = "FIELD", target = "Lnet/minecraft/client/option/GameOptions;debugEnabled:Z", opcode = Opcodes.GETFIELD, args = {"log=false"}))
+    @Inject(method = "render", at = @At(value = "FIELD", target = "Lnet/minecraft/client/gui/hud/InGameHud;debugHud:Lnet/minecraft/client/gui/hud/DebugHud;", opcode = Opcodes.GETFIELD, args = {"log=false"}))
     private void beforeRenderDebugScreen2(DrawContext context, float tickDelta, CallbackInfo ci) {
         if (playtimegui == null)
             playtimegui = new GUI();
